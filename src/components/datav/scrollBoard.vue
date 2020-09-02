@@ -7,9 +7,9 @@
 <script>
 import mqtt from 'mqtt'
 let mqclient
-mqclient = mqtt.connect('ws://172.16.0.26:15675/ws', {
-  username: 'yt',
-  password: '123456'
+mqclient = mqtt.connect('ws://111.231.29.18:15672/ws', {
+  username: 'yaoyao',
+  password: 'Xiaojingling%!8'
 })
 export default {
   name: 'ScrollBoard',
