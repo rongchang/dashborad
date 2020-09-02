@@ -74,10 +74,8 @@ export default {
         this.express_order_count=express_order_count;
         this.e_order_count=e_order_count;
         this.suxi_order_count=suxi_order_count;
-        // this.max_sum=order.limit.order_count_max;
-        // this.interval=order.limit.order_count_max/10;
-        this.max_sum = 100
-        this.interval = 10
+        this.max_sum = order.limit.order_count_max
+        this.interval = order.limit.order_count_max / 10
         this.e_last_count = e_order_count[e_order_count.length - 1]
         this.express_last_count = express_order_count[express_order_count.length - 1]
         this.suxi_last_count = suxi_order_count[suxi_order_count.length - 1]
@@ -87,9 +85,9 @@ export default {
     },
 
     createData () {
-      var e_name = 'e袋洗'+"("+this.e_last_count+")";
-      var express_name="快递"+"("+this.express_last_count+")";
-      var suxi_name="速洗"+"("+this.suxi_last_count+")";
+      var e_name = 'e袋洗' + '(' + this.e_last_count + ')'
+      var express_name='快递' + '(' + this.express_last_count + ')'
+      var suxi_name='速洗' + '(' + this.suxi_last_count + ')'
       this.option = {
         legend: {
           data: [ {
