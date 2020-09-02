@@ -5,20 +5,18 @@
 </template>
 
 <script>
-  import mqtt from 'mqtt'
-
-  let mqclient
-
-  mqclient = mqtt.connect('ws://172.16.0.26:15675/ws', {
-    username: "yt",
-    password: "123456"
-  })
+import mqtt from 'mqtt'
+let mqclient
+mqclient = mqtt.connect('ws://172.16.0.26:15675/ws', {
+  username: 'yt',
+  password: '123456'
+})
 export default {
   name: 'ScrollBoard',
   data () {
     return {
       config: {},
-      order:[]
+      order: []
     }
   },
   created () {
@@ -35,12 +33,13 @@ export default {
       })
 
       mqclient.on('message', (topic, message) => {
-        var msg=JSON.parse(message);
-        var arr=[];
-        for (var i in msg){
-          arr.push([msg[i].created_at,msg[i].complaint,msg[i].ordersn])
+        var msg = JSON.parse(message)
+        var arr = []
+        for (var i in msg) {
+          arr.push([msg[i].created_at, msg[i].complaint, msg[i].ordersn])
         }
-        this.order=arr;
+        console.log(arr)
+        this.order = arr
         console.log(arr)
         this.createData()
       })
@@ -62,18 +61,17 @@ export default {
     }
   },
   mounted () {
-    var arr=[];
-    this.$http.get('http://express.edaixipublic.cn/api/data/analysis/orderComplain').then(response =>{
-      var msg=response.body.data;
+    var arr = []
+    this.$http.get('http://express.edaixipublic.cn/api/data/analysis/orderComplain').then(response => {
+      var msg = response.body.data
       console.log(55)
       console.log(response.body)
-      for (var i in msg){
-        arr.push([msg[i].created_at,msg[i].complaint,msg[i].ordersn])
-        this.order=arr;
+      for (var i in msg) {
+        arr.push([msg[i].created_at, msg[i].complaint, msg[i].ordersn])
+        this.order = arr
       }
-      this.createData();
-
-    }, response=>{
+      this.createData()
+    }, response => {
       console.log('请求失败')
     })
 

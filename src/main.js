@@ -5,6 +5,7 @@ import './assets/common.less'
 
 import dataV from '@jiaminghi/data-view'
 import VueResource from 'vue-resource'
+
 Vue.use(VueResource)
 Vue.config.productionTip = false
 

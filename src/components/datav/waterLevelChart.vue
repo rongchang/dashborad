@@ -13,69 +13,66 @@
 </template>
 
 <script>
+import mqtt from 'mqtt'
+let mqclient
+mqclient = mqtt.connect('ws://172.16.0.26:15675/ws', {
+  username: 'yt',
+  password: '123456'
+})
+export default {
+  name: 'WaterLevelChart',
+  data () {
+    return {
+      config: {},
+      order_sum_price: 0,
+      percent: 0
+    }
+  },
+  created () {
+    this.getMsg()
+  },
+  methods: {
+    getMsg () {
+      mqclient.on('connect', function () {
+      mqclient.subscribe('order_data', { qos: 0 }, function (err) {
+          if (!err) {
+            console.log('订阅成功')
+          }
+        })
+      })
 
-  import mqtt from 'mqtt'
+     mqclient.on('message', (topic, message) => {
+        var order = JSON.parse(message)
+        var msg = order.order
+        console.log(msg)
+        this.order_sum_price = msg.order_target_price
+        var target = msg.order_target_price == 0 ? 1 : msg.order_target_price
+        this.percent = ((msg.order_sum_price / target).toFixed(2)) * 100
 
-  let mqclient
-
-  mqclient = mqtt.connect('ws://172.16.0.26:15675/ws', {
-    username: "yt",
-    password: "123456"
-  })
-  export default {
-    name: 'WaterLevelChart',
-    data () {
-      return {
-        config: {},
-        order_sum_price:0,
-        percent:0,
+        this.createData()
+      })
+    },
+    createData () {
+      this.config = {
+        data: [this.percent],
+        shape: 'round',
+        waveHeight: 10,
+        waveNum: 2
       }
     },
-    created () {
-      this.getMsg()
-    },
-    methods: {
-      getMsg () {
-        mqclient.on('connect', function () {
-          mqclient.subscribe('order_data', { qos: 0 }, function (err) {
-            if (!err) {
-              console.log('订阅成功')
-            }
-          })
-        })
-
-        mqclient.on('message', (topic, message) => {
-          var order=JSON.parse(message)
-          var msg=order.order;
-          console.log(msg)
-          this.order_sum_price=msg.order_target_price;
-          var target=msg.order_target_price==0?1:msg.order_target_price;
-          this.percent=((msg.order_sum_price/target).toFixed(2))*100;
-
-          this.createData()
-        })
-      },
-      createData () {
-        this.config = {
-          data: [this.percent],
-          shape: 'round',
-          waveHeight: 10,
-          waveNum: 2
-        }
-      },
-    },
-    mounted () {
-      this.$http.get('http://express.edaixipublic.cn/api/data/analysis/orderData').then(response =>{
-        var order=response.body.data.order;
-        this.order_sum_price=order.order_target_price;
-        var target=order.order_target_price==0?1:order.order_target_price;
-        this.percent=((order.order_sum_price/target).toFixed(2))*100;
-        this.createData();
-      }, response=>{
-        console.log('请求失败')
-      })
-    }
+  },
+  mounted () {
+    this.$http.get('http://express.edaixipublic.cn/api/data/analysis/orderData').then(response => {
+      var order = response.body.data.order
+      this.order_sum_price = order.order_target_price
+      var target = order.order_target_price == 0?1:order.order_target_price
+      this.percent = ((order.order_sum_price / target).toFixed(2)) * 100
+      this.createData()
+    }, response => {
+      console.log('请求失败')
+    })
   }
+}
 
 </script>
 
@@ -83,7 +80,6 @@
 #water-level-chart {
   width: 50%;
   box-sizing: border-box;
-  margin-left: 20px;
   background-color: rgba(6, 30, 93, 0.5);
   border-top: 2px solid rgba(1, 153, 209, .5);
   display: flex;
