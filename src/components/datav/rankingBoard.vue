@@ -63,10 +63,6 @@ export default {
             value: this.shopping_sum_humans
           },
           {
-            name: '拼团人数',
-            value: this.shopping_sum_humans
-          },
-          {
             name: '用户充值',
             value: this.paylog_sum_price
           }
