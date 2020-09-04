@@ -19,7 +19,8 @@ export default {
       config: {},
       shopping_count: 0,
       shopping_sum_price: 0,
-      shopping_sum_humans: 0
+      shopping_sum_humans: 0,
+      paylog_sum_price: 0
     }
   },
   created () {
@@ -41,6 +42,7 @@ export default {
         this.shopping_count = msg[0].shopping_count
         this.shopping_sum_price = msg[0].shopping_sum_price
         this.shopping_sum_humans = msg[0].shopping_sum_humans
+        this.paylog_sum_price = msg.paylog_sum_price
         console.log('收到来自', topic, '的消息', message)
         this.createData()
       })
@@ -59,6 +61,14 @@ export default {
           {
             name: '拼团人数',
             value: this.shopping_sum_humans
+          },
+          {
+            name: '拼团人数',
+            value: this.shopping_sum_humans
+          },
+          {
+            name: '用户充值',
+            value: this.paylog_sum_price
           }
         ],
         rowNum: 9
@@ -72,6 +82,7 @@ export default {
       this.shopping_count = msg[0].shopping_count
       this.shopping_sum_price = msg[0].shopping_sum_price
       this.shopping_sum_humans = msg[0].shopping_sum_humans
+      this.paylog_sum_price = msg.paylog_sum_price
       this.createData()
     }, response => {
       console.log('请求失败')
@@ -82,7 +93,7 @@ export default {
 
 <style lang="less">
 #ranking-board {
-  width: 20%;
+  width: 100%;
   box-shadow: 0 0 3px blue;
   display: flex;
   flex-direction: column;
@@ -105,7 +116,7 @@ export default {
 }
 
 .dv-scroll-ranking-board .row-item{
- height:50px ;
-  padding: 10px 0px;
+ height:100px ;
+  padding: 25px 0px;
 }
 </style>
