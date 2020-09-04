@@ -89,7 +89,8 @@ export default {
 
 <style lang="less">
 #ranking-board {
-  width: 100%;
+  /*width: 100%;*/
+  width: 20%;
   box-shadow: 0 0 3px blue;
   display: flex;
   flex-direction: column;
@@ -112,7 +113,9 @@ export default {
 }
 
 .dv-scroll-ranking-board .row-item{
- height:100px ;
-  padding: 25px 0px;
+  /*height:100px ;*/
+  /*padding: 25px 0px;*/
+ height:50px ;
+  padding: 10px 0px;
 }
 </style>
