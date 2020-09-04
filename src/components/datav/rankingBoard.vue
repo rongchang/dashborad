@@ -39,9 +39,9 @@ export default {
       mqclient.on('message', (topic, message) => {
         var msg = JSON.parse(message)
         console.log(msg)
-        this.shopping_count = msg[0].shopping_count
-        this.shopping_sum_price = msg[0].shopping_sum_price
-        this.shopping_sum_humans = msg[0].shopping_sum_humans
+        this.shopping_count = msg.shopping_count
+        this.shopping_sum_price = msg.shopping_sum_price
+        this.shopping_sum_humans = msg.shopping_sum_humans
         this.paylog_sum_price = msg.paylog_sum_price
         console.log('收到来自', topic, '的消息', message)
         this.createData()
@@ -75,9 +75,9 @@ export default {
     this.$http.get('http://express.edaixipublic.cn/api/data/analysis/shoppingData').then(response => {
       var msg = response.body.data
       console.log(msg)
-      this.shopping_count = msg[0].shopping_count
-      this.shopping_sum_price = msg[0].shopping_sum_price
-      this.shopping_sum_humans = msg[0].shopping_sum_humans
+      this.shopping_count = msg.shopping_count
+      this.shopping_sum_price = msg.shopping_sum_price
+      this.shopping_sum_humans = msg.shopping_sum_humans
       this.paylog_sum_price = msg.paylog_sum_price
       this.createData()
     }, response => {
