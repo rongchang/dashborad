@@ -88,7 +88,7 @@ export default {
     },
   },
   mounted () {
-    this.$http.get('http://express.edaixipublic.cn/api/data/analysis/orderStatus').then(response =>{
+    this.$http.get('http://express.edaixipublic.com/api/data/analysis/orderStatus').then(response =>{
       var msg=response.body.data;
       console.log(msg)
       this.order_timeout=msg.timeout_count.order_timeout>0?msg.timeout_count.order_timeout:1;

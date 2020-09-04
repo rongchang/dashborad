@@ -34,14 +34,14 @@ export default {
   methods: {
     getMsg () {
       mqclient.on('connect', function () {
-      mqclient.subscribe('order_data', { qos: 0 }, function (err) {
+        mqclient.subscribe('order_data', { qos: 0 }, function (err) {
           if (!err) {
             console.log('订阅成功')
           }
         })
       })
 
-     mqclient.on('message', (topic, message) => {
+      mqclient.on('message', (topic, message) => {
         var order = JSON.parse(message)
         var msg = order.order
         console.log(msg)
@@ -62,7 +62,7 @@ export default {
     },
   },
   mounted () {
-    this.$http.get('http://express.edaixipublic.cn/api/data/analysis/orderData').then(response => {
+    this.$http.get('http://express.edaixipublic.com/api/data/analysis/orderData').then(response => {
       var order = response.body.data.order
       this.order_sum_price = order.order_target_price
       var target = order.order_target_price == 0?1:order.order_target_price

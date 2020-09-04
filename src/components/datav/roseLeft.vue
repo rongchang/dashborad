@@ -88,7 +88,7 @@
       },
     },
     mounted () {
-      this.$http.get('http://express.edaixipublic.cn/api/data/analysis/orderStatus').then(response =>{
+      this.$http.get('http://express.edaixipublic.com/api/data/analysis/orderStatus').then(response =>{
         var msg=response.body.data;
         console.log(msg)
         this.dai_qu_jian_count=msg.status_count.dai_qu_jian_count;

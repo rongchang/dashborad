@@ -1,32 +1,47 @@
+
 <template>
   <div id="data-view">
     <dv-full-screen-container>
+      <div class="main-header">
+        <div class="mh-right">
 
-      <top-header />
-
-      <div class="main-content">
-
-        <div class="block-left-right-content">
-<!--          <ranking-board />-->
-
-          <div class="block-top-bottom-content">
-            <div class="block-top-content" style="height: 50%;">
-              <ranking-board/>
-              <top-left-cmp />
-              <top-right-cmp />
-
-            </div>
-            <div class="block-top-content" style="height: 50%;">
-<!--              <rose-left />-->
-<!--              <rose-chart />-->
-              <water-level-chart />
-              <scroll-board/>
-            </div>
-
-
-          </div>
         </div>
       </div>
+
+      <dv-border-box-1 class="main-container">
+        <dv-border-box-3 class="left-chart-container">
+
+          <ranking-board />
+
+        </dv-border-box-3>
+
+        <div class="right-main-container">
+          <div class="rmc-top-container">
+            <dv-border-box-3 class="rmctc-left-container">
+
+              <Center-Cmp />
+
+            </dv-border-box-3>
+
+            <div class="rmctc-right-container">
+              <dv-border-box-3 class="rmctc-chart-1">
+
+                <scroll-board />
+
+              </dv-border-box-3>
+
+            </div>
+          </div>
+
+          <dv-border-box-4 class="rmc-bottom-container">
+
+            <top-left-cmp/>
+            <top-right-cmp/>
+
+          </dv-border-box-4>
+        </div>
+      </dv-border-box-1>
+
     </dv-full-screen-container>
   </div>
 </template>
@@ -42,6 +57,7 @@ import scrollBoard from './scrollBoard'
 import cards from './cards'
 import topRightCmp from './topRightCmp'
 import topLeftCmp from './topLeftCmp'
+import CenterCmp from './CenterCmp'
 
 export default {
   name: 'DataView',
@@ -55,7 +71,8 @@ export default {
     cards,
     topRightCmp,
     topLeftCmp,
-    roseLeft
+    roseLeft,
+    CenterCmp
   },
   data () {
     return {}
@@ -65,44 +82,73 @@ export default {
 </script>
 
 <style lang="less">
-#data-view {
-  width: 100%;
-  height: 100%;
-  background-color: #030409;
-  color: #fff;
-
-  #dv-full-screen-container {
-    background-image: url('./img/bg.png');
-    background-size: 100% 100%;
-    box-shadow: 0 0 3px blue;
-    display: flex;
-    flex-direction: column;
+  #data-view {
+    width: 100%;
+    height: 100%;
+    background-color: #030409;
+    color: #fff;
+    #dv-full-screen-container {
+      background-image: url('./img/bg.png');
+      background-size: 100% 100%;
+      box-shadow: 0 0 3px blue;
+      display: flex;
+      flex-direction: column;
+    }
+    .main-header {
+      height: 80px;
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-end;
+      .mh-left {
+        font-size: 20px;
+        color: rgb(1,134,187);
+        a:visited {
+          color: rgb(1,134,187);
+        }
+      }
+      .mh-middle {
+        font-size: 30px;
+      }
+      .mh-left, .mh-right {
+        width: 450px;
+      }
+    }
+    .main-container {
+      height: calc(~"100% - 80px");
+      .border-box-content {
+        padding: 20px;
+        box-sizing: border-box;
+        display: flex;
+      }
+    }
+    .left-chart-container {
+      width: 22%;
+      padding: 10px;
+      box-sizing: border-box;
+      .border-box-content {
+        flex-direction: column;
+      }
+    }
+    .right-main-container {
+      width: 78%;
+      padding-left: 5px;
+      box-sizing: border-box;
+    }
+    .rmc-top-container {
+      height: 65%;
+      display: flex;
+    }
+    .rmctc-left-container {
+      width: 65%;
+    }
+    .rmctc-right-container {
+      width: 35%;
+    }
+    .rmc-bottom-container {
+      height: 35%;
+    }
+    .rmctc-chart-1, .rmctc-chart-2 {
+      height: 100%;
+    }
   }
-
-  .main-content {
-    flex: 1;
-    display: flex;
-    flex-direction: column;
-  }
-
-  .block-left-right-content {
-    flex: 1;
-    display: flex;
-    margin-top: 20px;
-  }
-
-  .block-top-bottom-content {
-    flex: 1;
-    display: flex;
-    flex-direction: column;
-    box-sizing: border-box;
-    padding-left: 20px;
-  }
-
-  .block-top-content {
-    display: flex;
-    flex-grow: 0;
-    box-sizing: border-box;
-  }
-}
 </style>

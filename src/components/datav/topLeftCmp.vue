@@ -56,7 +56,8 @@ export default {
         var suxi_order_count=[];
         console.log('收到来自', topic, '的消息111')
         for (var i = 0; i < express.length; i++) {
-          date.push(express[i].time.split(' ')[1])
+          var time = express[i].time.split(' ')[1];
+          date.push(time.split(':')[0] + ':' + time.split(':')[1]);
           express_order_count.push(express[i].order_count)
         }
         for (var j = 0; j < e.length; j++) {
@@ -202,7 +203,7 @@ export default {
   },
   mounted () {
     console.log(this.$root.URL);
-    this.$http.get('http://express.edaixipublic.cn/api/data/analysis/orderData').then(response =>{
+    this.$http.get('http://express.edaixipublic.com/api/data/analysis/orderData').then(response =>{
       console.log('hh22')
       console.log(response.body.data)
       var order = response.body.data;
@@ -214,7 +215,8 @@ export default {
       var e_order_count = [];
       var suxi_order_count = [];
       for (var i = 0; i < express.length; i++) {
-        date.push(express[i].time.split(' ')[1])
+        var time = express[i].time.split(' ')[1];
+        date.push(time.split(':')[0] + ':' + time.split(':')[1]);
         express_order_count.push(express[i].order_count)
       }
       for (var j = 0; j < e.length; j++) {
@@ -239,7 +241,6 @@ export default {
 <style lang="less">
   #left-chart {
     width: 50%;
-    height: 100%;
     background-color: rgba(6, 30, 93, 0.5);
     border-top: 2px solid rgba(1, 153, 209, .5);
     box-sizing: border-box;
@@ -264,73 +265,5 @@ export default {
     font-size: 20px;
     bottom: 260px;
   }
-  #cards {
-    display: flex;
-    justify-content: space-between;
-    height: 45%;
-    width: 50%;
 
-    .card-item {
-      background-color: rgba(6, 30, 93, 0.5);
-      border-top: 2px solid rgba(1, 153, 209, .5);
-      width: 19%;
-      display: flex;
-      flex-direction: column;
-    }
-
-    .card-header {
-      display: flex;
-      height: 20%;
-      align-items: center;
-      justify-content: space-between;
-
-      .card-header-left {
-        font-size: 18px;
-        font-weight: bold;
-        padding-left: 20px;
-      }
-
-      .card-header-right {
-        padding-right: 20px;
-        font-size: 40px;
-        color: #03d3ec;
-      }
-    }
-
-    .ring-charts {
-      height: 55%;
-    }
-
-    .card-footer {
-      height: 25%;
-      display: flex;
-      align-items: center;
-      justify-content: space-around;
-    }
-
-    .card-footer-item {
-      padding: 5px 10px 0px 10px;
-      box-sizing: border-box;
-      width: 40%;
-      background-color: rgba(6, 30, 93, 0.7);
-      border-radius: 3px;
-
-      .footer-title {
-        font-size: 15px;
-        margin-bottom: 5px;
-      }
-
-      .footer-detail {
-        font-size: 20px;
-        color: #1294fb;
-        display: flex;
-        font-size: 18px;
-        align-items: center;
-
-        .dv-digital-flop {
-          margin-right: 5px;
-        }
-      }
-    }
-  }
 </style>

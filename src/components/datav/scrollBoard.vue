@@ -62,7 +62,7 @@ export default {
   },
   mounted () {
     var arr = []
-    this.$http.get('http://express.edaixipublic.cn/api/data/analysis/orderComplain').then(response => {
+    this.$http.get('http://express.edaixipublic.com/api/data/analysis/orderComplain').then(response => {
       var msg = response.body.data
       console.log(55)
       console.log(response.body)
@@ -83,7 +83,7 @@ export default {
 <style lang="less">
 #scroll-board {
   background-color: rgba(6, 30, 93, 0.5);
-  width: 50%;
+  width: 100%;
   box-sizing: border-box;
   margin-left: 7px;
   height: 100%;

@@ -72,7 +72,7 @@ export default {
     },
   },
   mounted () {
-    this.$http.get('http://express.edaixipublic.cn/api/data/analysis/shoppingData').then(response => {
+    this.$http.get('http://express.edaixipublic.com/api/data/analysis/shoppingData').then(response => {
       var msg = response.body.data
       console.log(msg)
       this.shopping_count = msg.shopping_count
@@ -89,8 +89,7 @@ export default {
 
 <style lang="less">
 #ranking-board {
-  /*width: 100%;*/
-  width: 20%;
+  width: 100%;
   box-shadow: 0 0 3px blue;
   display: flex;
   flex-direction: column;
@@ -113,9 +112,7 @@ export default {
 }
 
 .dv-scroll-ranking-board .row-item{
-  /*height:100px ;*/
-  /*padding: 25px 0px;*/
- height:50px ;
-  padding: 10px 0px;
+  height:100px ;
+  padding: 25px 0px;
 }
 </style>
