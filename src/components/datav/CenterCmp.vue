@@ -12,19 +12,17 @@
       <div class="card">0</div>
       <div class="card">0</div>
       <div class="card">0</div>
-      <div class="card">0</div>
-      <div class="card">0</div>
-      <div class="card">0</div>
-      <div class="card">0</div>
+      <div class="card">w</div>
     </div>
 
     <div class="cc-main-container">
       <div class="ccmc-left">
-        <div class="station-info">
-          剩余<span>{{surplus_num}}w</span>
+        <div class="station-info" >
+          <p style="position: absolute; left: 30px;top: -50px;color: rgb(0, 186, 255);">剩余</p>
+          <span>{{surplus_num}}w</span>
         </div>
         <div class="station-info">
-          拼团<span>{{shopping_price}}</span>
+          <p style="position: absolute; left: 30px;top: -15px;color: rgb(61, 231, 201);">拼团</p><span style="position: absolute;top: 50px;">{{shopping_price}}</span>
         </div>
       </div>
 
@@ -32,10 +30,10 @@
 
       <div class="ccmc-right">
         <div class="station-info">
-          <span>{{paylod_price}}</span>充值
+          <span>{{paylog_price}}</span><p style="position: absolute;right: 100px;top: -50px;">充值</p>
         </div>
         <div class="station-info">
-          <span>{{order_price}}</span>订单
+          <span style="position: absolute;top: 50px;">{{order_num}}w</span><p style="position: absolute;right: 100px;top: -15px;color: rgb(255, 197, 48);">订单</p>
         </div>
       </div>
 
@@ -62,9 +60,10 @@ export default {
       config: {},
       surplus_price:0,
       shopping_price:0,
-      paylod_price:0,
+      paylog_price:0,
       order_price:0,
       surplus_num:0,
+      order_num:0,
       labelConfig: {
         data: ['剩余', '拼团', '充值', '订单']
       }
@@ -87,8 +86,9 @@ export default {
         var msg = JSON.parse(message)
         this.surplus_price = msg.total.surplus_price;
         this.shopping_price = msg.total.shopping_price;
-        this.paylod_price = msg.total.paylod_price;
+        this.paylog_price = msg.total.paylog_price;
         this.order_price = msg.total.order_price;
+        this.order_num = Number(msg.total.order_price / 10000).toFixed(0);
         this.surplus_num = Number(msg.total.surplus_price / 10000).toFixed(0);
         this.createData();
       })
@@ -107,7 +107,7 @@ export default {
           },
           {
             name: '充值',
-            value: this.paylod_price
+            value: this.paylog_price
           },
           {
             name: '订单',
@@ -128,8 +128,9 @@ export default {
       console.log(msg)
       this.surplus_price = msg.total.surplus_price;
       this.shopping_price = msg.total.shopping_price;
-      this.paylod_price = msg.total.paylod_price;
+      this.paylog_price = msg.total.paylog_price;
       this.order_price = msg.total.order_price;
+      this.order_num = Number(msg.total.order_price / 10000).toFixed(0);
       this.surplus_num = Number(msg.total.surplus_price / 10000).toFixed(0);
       this.createData();
     }, response => {
@@ -197,6 +198,9 @@ export default {
           height: 80px;
           display: flex;
           align-items: center;
+          width: 150px;
+          padding-left: 10px;
+          position: relative;
         }
       }
       .ccmc-left {

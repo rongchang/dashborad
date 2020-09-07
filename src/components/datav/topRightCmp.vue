@@ -229,6 +229,9 @@ export default {
       this.suxi_order_price = suxi_order_price;
       this.max_sum = order.limit.order_price_max
       this.interval = order.limit.order_price_max / 10
+      this.e_last_price = e_order_price[e_order_price.length - 1]
+      this.express_last_price = express_order_price[express_order_price.length - 1]
+      this.suxi_last_price = suxi_order_price[suxi_order_price.length - 1]
       this.date=date
       this.createData()
     }, response => {

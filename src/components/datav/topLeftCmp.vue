@@ -230,6 +230,9 @@ export default {
       this.suxi_order_count = suxi_order_count;
       this.max_sum = order.limit.order_count_max
       this.interval = order.limit.order_count_max/10
+      this.e_last_count = e_order_count[e_order_count.length - 1]
+      this.express_last_count = express_order_count[express_order_count.length - 1]
+      this.suxi_last_count = suxi_order_count[suxi_order_count.length - 1]
       this.date = date
       this.createData()
     }, response => {
