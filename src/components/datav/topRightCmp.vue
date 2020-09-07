@@ -75,11 +75,17 @@ export default {
         this.express_order_price=express_order_price;
         this.e_order_price=e_order_price;
         this.suxi_order_price=suxi_order_price;
-        this.max_sum = order.limit.order_price_max
-        this.interval = order.limit.order_price_max / 10
         this.e_last_price = e_order_price[e_order_price.length - 1]
         this.express_last_price = express_order_price[express_order_price.length - 1]
         this.suxi_last_price = suxi_order_price[suxi_order_price.length - 1]
+        var max=0;
+        if(this.e_last_price>this.express_last_price){
+          max=this.e_last_price
+        }else{
+          max=this.express_last_price
+        }
+        this.max_sum = Math.round(max+max/3)
+        this.interval = Math.round(this.max_sum/5)
         this.date = date
         this.createData()
       })
@@ -227,11 +233,17 @@ export default {
       this.express_order_price = express_order_price;
       this.e_order_price = e_order_price;
       this.suxi_order_price = suxi_order_price;
-      this.max_sum = order.limit.order_price_max
-      this.interval = order.limit.order_price_max / 10
       this.e_last_price = e_order_price[e_order_price.length - 1]
       this.express_last_price = express_order_price[express_order_price.length - 1]
       this.suxi_last_price = suxi_order_price[suxi_order_price.length - 1]
+      var max=0;
+      if(this.e_last_price>this.express_last_price){
+         max=this.e_last_price
+      }else{
+        max=this.express_last_price
+      }
+      this.max_sum = Math.round(max+max/3)
+      this.interval = Math.round(this.max_sum/5)
       this.date=date
       this.createData()
     }, response => {

@@ -75,11 +75,17 @@ export default {
         this.express_order_count=express_order_count;
         this.e_order_count=e_order_count;
         this.suxi_order_count=suxi_order_count;
-        this.max_sum = order.limit.order_count_max
-        this.interval = order.limit.order_count_max / 10
+        var max=0;
         this.e_last_count = e_order_count[e_order_count.length - 1]
         this.express_last_count = express_order_count[express_order_count.length - 1]
         this.suxi_last_count = suxi_order_count[suxi_order_count.length - 1]
+        if(this.e_last_count>this.express_last_count){
+          max=this.e_last_count;
+        }else{
+          max=this.express_last_count;
+        }
+        this.max_sum = Math.round(max+max/3)
+        this.interval = Math.round(this.max_sum/5)
         this.date = date
         this.createData()
       })
@@ -228,11 +234,18 @@ export default {
       this.express_order_count = express_order_count;
       this.e_order_count = e_order_count;
       this.suxi_order_count = suxi_order_count;
-      this.max_sum = order.limit.order_count_max
-      this.interval = order.limit.order_count_max/10
+      var max=0;
       this.e_last_count = e_order_count[e_order_count.length - 1]
       this.express_last_count = express_order_count[express_order_count.length - 1]
       this.suxi_last_count = suxi_order_count[suxi_order_count.length - 1]
+      if(this.e_last_count>this.express_last_count){
+        max=this.e_last_count;
+      }else{
+        max=this.express_last_count;
+      }
+      this.max_sum = Math.round(max+max/3)
+      this.interval = Math.round(this.max_sum/5)
+      console.log(10/3)
       this.date = date
       this.createData()
     }, response => {
