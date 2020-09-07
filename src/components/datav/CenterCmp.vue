@@ -95,7 +95,7 @@ export default {
         this.order_price = msg.total.order_price;
         this.order_num = Number(msg.total.order_price / 10000).toFixed(0);
         this.surplus_num = Number(msg.total.surplus_price / 10000).toFixed(0);
-        this.number = 5000;
+        this.number = 4999;
         this.createData();
       })
     },

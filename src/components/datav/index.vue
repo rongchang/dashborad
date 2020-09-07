@@ -47,14 +47,8 @@
 </template>
 
 <script>
-import topHeader from './topHeader'
-import digitalFlop from './digitalFlop'
 import rankingBoard from './rankingBoard'
-import roseChart from './roseChart'
-import roseLeft from './roseLeft'
-import waterLevelChart from './waterLevelChart'
 import scrollBoard from './scrollBoard'
-import cards from './cards'
 import topRightCmp from './topRightCmp'
 import topLeftCmp from './topLeftCmp'
 import CenterCmp from './CenterCmp'
@@ -62,16 +56,10 @@ import CenterCmp from './CenterCmp'
 export default {
   name: 'DataView',
   components: {
-    topHeader,
-    digitalFlop,
     rankingBoard,
-    roseChart,
-    waterLevelChart,
     scrollBoard,
-    cards,
     topRightCmp,
     topLeftCmp,
-    roseLeft,
     CenterCmp
   },
   data () {
