@@ -7,12 +7,14 @@
     </div>
 
     <div class="cc-details">
-      <div>目标</div>
-      <div class="card">5</div>
-      <div class="card">0</div>
-      <div class="card">0</div>
-      <div class="card">0</div>
-      <div class="card">w</div>
+
+<!--      <div>目标</div>-->
+      <dv-digital-flop :config="config1" style="width:600px;height:300px;" />
+<!--      <div class="card">5</div>-->
+<!--      <div class="card">0</div>-->
+<!--      <div class="card">0</div>-->
+<!--      <div class="card">0</div>-->
+<!--      <div class="card">w</div>-->
     </div>
 
     <div class="cc-main-container">
@@ -50,6 +52,7 @@ mqclient = mqtt.connect('ws://111.231.29.18:15672/ws', {
   username: 'yaoyao',
   password: 'Xiaojingling%!8'
 })
+
 export default {
   name: 'CenterCmp',
   components: {
@@ -57,6 +60,7 @@ export default {
   },
   data () {
     return {
+      config1:{},
       config: {},
       surplus_price:0,
       shopping_price:0,
@@ -64,6 +68,7 @@ export default {
       order_price:0,
       surplus_num:0,
       order_num:0,
+      number:0,
       labelConfig: {
         data: ['剩余', '拼团', '充值', '订单']
       }
@@ -90,6 +95,7 @@ export default {
         this.order_price = msg.total.order_price;
         this.order_num = Number(msg.total.order_price / 10000).toFixed(0);
         this.surplus_num = Number(msg.total.surplus_price / 10000).toFixed(0);
+        this.number=5000;
         this.createData();
       })
     },
@@ -118,6 +124,15 @@ export default {
         lineWidth: 30,
         radius: '55%',
         activeRadius: '60%'
+      },
+      this.config1 = {
+        number: [this.number],
+        toFixed: 0,
+        content: '{nt}w',
+        style: {
+          fontSize: 100,
+          fill: '#3de7c9'
+        }
       }
     }
   },
@@ -132,6 +147,7 @@ export default {
       this.order_price = msg.total.order_price;
       this.order_num = Number(msg.total.order_price / 10000).toFixed(0);
       this.surplus_num = Number(msg.total.surplus_price / 10000).toFixed(0);
+      this.number=5000;
       this.createData();
     }, response => {
       console.log('请求失败')
