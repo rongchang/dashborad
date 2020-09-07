@@ -7,7 +7,7 @@
 <script>
 import mqtt from 'mqtt'
 let mqclient
-mqclient = mqtt.connect('ws://111.231.29.18:15672/ws', {
+mqclient = mqtt.connect('ws://111.231.29.18:15675/ws', {
   username: 'yaoyao',
   password: 'Xiaojingling%!8'
 })

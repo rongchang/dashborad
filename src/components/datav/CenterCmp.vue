@@ -48,7 +48,7 @@
 import LabelTag from './LabelTag'
 import mqtt from 'mqtt'
 let mqclient
-mqclient = mqtt.connect('ws://111.231.29.18:15672/ws', {
+mqclient = mqtt.connect('ws://111.231.29.18:15675/ws', {
   username: 'yaoyao',
   password: 'Xiaojingling%!8'
 })
@@ -95,7 +95,7 @@ export default {
         this.order_price = msg.total.order_price;
         this.order_num = Number(msg.total.order_price / 10000).toFixed(0);
         this.surplus_num = Number(msg.total.surplus_price / 10000).toFixed(0);
-        this.number=5000;
+        this.number = 5000;
         this.createData();
       })
     },
