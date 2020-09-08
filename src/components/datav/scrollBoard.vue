@@ -36,7 +36,8 @@ export default {
         var msg = JSON.parse(message)
         var arr = []
         for (var i in msg) {
-          arr.push([msg[i].complaint])
+          var create=msg[i].created_at
+          arr.push([create.split(' ')[1],msg[i].complaint])
         }
         console.log(arr)
         this.order = arr
@@ -47,10 +48,10 @@ export default {
 
     createData () {
       this.config = {
-        header: [ '评价内容'],
+        header: ['评价日期','评价内容'],
         data: this.order,
         index: true,
-        columnWidth: [40, 600],
+        columnWidth: [40, 80,520],
         align: ['center'],
         rowNum: 7,
         headerBGC: '#1981f6',
@@ -67,8 +68,8 @@ export default {
       console.log(55)
       console.log(response.body)
       for (var i in msg) {
-        var created_at = msg[i].created_at
-        arr.push([msg[i].complaint])
+        var create=msg[i].created_at
+        arr.push([create.split(' ')[1],msg[i].complaint])
         this.order = arr
       }
       this.createData()

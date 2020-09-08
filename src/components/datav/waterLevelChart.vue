@@ -3,7 +3,7 @@
     <div class="water-level-chart-title">计划交易额</div>
 
     <div class="water-level-chart-details">
-      计划完成<span>50000000</span>元
+      计划完成<span>{{order_sum_price}}</span>元
     </div>
 
     <div class="chart-container" >
@@ -43,8 +43,8 @@ export default {
 
       mqclient.on('message', (topic, message) => {
         var order = JSON.parse(message)
-        var order_price = order.total.order_price + order.total.paylog_price + order.total.shopping_price + order.total.keyaccount_money
-        this.percent = ((order_price / 50000000) * 100).toFixed(2)
+        this.order_sum_price = order.total.order_price + order.total.paylog_price + order.total.shopping_price + order.total.keyaccount_money
+        this.percent = ((this.order_sum_price / 50000000) * 100).toFixed(2)
         this.createData()
       })
     },
@@ -61,10 +61,8 @@ export default {
     this.$http.get('http://express.edaixipublic.com/api/data/analysis/orderData').then(response => {
       var order = response.body.data
       console.log(response.body.data)
-      var order_price = order.total.order_price + order.total.paylog_price + order.total.shopping_price + order.total.keyaccount_money
-      console.log(order.total.keyaccount_money)
-      console.log(order_price)
-      this.percent = ((order_price / 50000000) * 100).toFixed(2)
+      this.order_sum_price = order.total.order_price + order.total.paylog_price + order.total.shopping_price + order.total.keyaccount_money
+      this.percent = ((this.order_sum_price / 50000000) * 100).toFixed(2)
       console.log(this.percent)
       this.createData()
     }, response => {
@@ -76,60 +74,62 @@ export default {
 </script>
 
 <style lang="less">
-#water-level-chart {
-  width: 50%;
-  box-sizing: border-box;
-  background-color: rgba(6, 30, 93, 0.5);
-  border-top: 2px solid rgba(1, 153, 209, .5);
-  display: flex;
-  flex-direction: column;
-
-  .water-level-chart-title {
-    font-weight: bold;
-    height: 50px;
+  #water-level-chart {
+    width: 20%;
+    box-sizing: border-box;
+    margin-left: 20px;
+    background-color: rgba(6, 30, 93, 0.5);
+    border-top: 2px solid rgba(1, 153, 209, .5);
     display: flex;
-    align-items: center;
-    font-size: 20px;
-    justify-content: center;
-  }
+    flex-direction: column;
+    margin-right: 10px;
 
-  .water-level-chart-details {
-    height: 13%;
-    display: flex;
-    justify-content: center;
-    font-size: 17px;
-    align-items: flex-end;
-
-    span {
-      font-size: 35px;
+    .water-level-chart-title {
       font-weight: bold;
-      color: #58a1ff;
-      margin: 0 5px;
-      margin-bottom: -5px;
-    }
-  }
-
-  .chart-container {
-    flex: 1;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-  }
-
-  .dv-water-pond-level {
-    max-width: 90%;
-    width: 200px;
-    height: 200px;
-    border: 10px solid #19c3eb;
-    border-radius: 50%;
-
-    ellipse {
-      stroke: transparent !important;
+      height: 50px;
+      display: flex;
+      align-items: center;
+      font-size: 20px;
+      justify-content: center;
     }
 
-    text {
-      font-size: 40px;
+    .water-level-chart-details {
+      height: 15%;
+      display: flex;
+      justify-content: center;
+      font-size: 17px;
+      align-items: flex-end;
+
+      span {
+        font-size: 35px;
+        font-weight: bold;
+        color: #ff5ca9;
+        margin: 0 5px;
+        margin-bottom: -5px;
+      }
+    }
+
+    .chart-container {
+      flex: 1;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+
+    .dv-water-pond-level {
+      max-width: 90%;
+      width: 200px;
+      height: 200px;
+      border: 10px solid #19c3eb;
+      border-radius: 50%;
+
+      ellipse {
+        stroke: transparent !important;
+      }
+
+      text {
+        font-size: 40px;
+      }
     }
   }
-}
 </style>

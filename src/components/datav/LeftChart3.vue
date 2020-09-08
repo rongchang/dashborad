@@ -23,8 +23,8 @@ export default {
       config: {},
       shopping_count:0,
       shopping_sum_humans:0,
-      paylog_sum_price:0,
-      shopping_sum_price:0
+      hongbao_price:0,
+      zhuanpan_price:0
     }
   },
   created () {
@@ -45,8 +45,8 @@ export default {
         console.log(msg)
         this.shopping_count = msg.shopping_count
         this.shopping_sum_humans = msg.shopping_sum_humans
-        this.paylog_sum_price=msg.paylog_sum_price
-        this.shopping_sum_price=msg.shopping_sum_price
+        this.hongbao_price=msg.hongbao_price
+        this.zhuanpan_price=msg.zhuanpan_price
         this.createData()
       })
     },
@@ -60,15 +60,16 @@ export default {
           {
             name: '今日成团数',
             value: this.shopping_count
+          },
+          {
+            name: '转盘参与人数',
+            value: this.zhuanpan_price
+
+          },
+          {
+            name: '红包参与人数',
+            value: this.hongbao_price
           }
-          // {
-          //   name: '今日充值',
-          //   value: this.paylog_sum_price
-          // },
-          // {
-          //   name: '今日拼团成交额',
-          //   value: this.shopping_sum_price
-          // }
         ],
         colors: ['#00baff', '#3de7c9', '#fff', '#ffc530', '#469f4b'],
       }
@@ -80,8 +81,8 @@ export default {
       console.log(msg)
       this.shopping_count = msg.shopping_count
       this.shopping_sum_humans = msg.shopping_sum_humans
-      this.paylog_sum_price=msg.paylog_sum_price
-      this.shopping_sum_price=msg.shopping_sum_price
+      this.hongbao_price=msg.hongbao_price
+      this.zhuanpan_price=msg.zhuanpan_price
       this.createData()
     }, response => {
       console.log('请求失败')
@@ -93,10 +94,10 @@ export default {
 <style lang="less">
 .left-chart-3 {
   width: 100%;
-  height: 25%;
+  height: 27%;
   display: flex;
   flex-direction: column;
-
+  background-color: rgba(6, 30, 93, 0.5);
   .lc1-header {
     text-align: center;
     height: 40px;

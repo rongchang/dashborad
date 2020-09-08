@@ -136,4 +136,4 @@ export default {
       height: calc(~"100% - 80px");
     }
   }
-</style>
+  </style>

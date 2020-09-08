@@ -1,6 +1,6 @@
 <template>
   <div id="rose-chart" style="margin-left: 7px;">
-    <div class="rose-chart-title">5小时快洗超时</div>
+    <div class="rose-chart-title">城市订单金额分布</div>
     <dv-charts :option="option" />
   </div>
 </template>
@@ -80,7 +80,7 @@ export default {
             roseType: true
           }
         ],
-        color: ['#da2f00', '#fa3600', '#ff4411', '#ff724c', '#541200', '#801b00', ]
+        color: ['#00baff', '#3de7c9', '#ffc530', '#469f4b' ]
       }
     },
   },
@@ -106,24 +106,24 @@ export default {
 </script>
 
 <style lang="less">
-#rose-chart {
-  width: 35%;
-  height: 100%;
-  background-color: rgba(6, 30, 93, 0.5);
-  border-top: 2px solid rgba(1, 153, 209, .5);
-  box-sizing: border-box;
+  #rose-chart {
+    width: 30%;
+    height: 100%;
+    background-color: rgba(6, 30, 93, 0.5);
+    border-top: 2px solid rgba(1, 153, 209, .5);
+    box-sizing: border-box;
 
-  .rose-chart-title {
-    height: 50px;
-    font-weight: bold;
-    text-indent: 20px;
-    font-size: 20px;
-    display: flex;
-    align-items: center;
-  }
+    .rose-chart-title {
+      height: 50px;
+      font-weight: bold;
+      text-indent: 20px;
+      font-size: 20px;
+      display: flex;
+      align-items: center;
+    }
 
-  .dv-charts-container {
-    height: calc(~"100% - 50px");
+    .dv-charts-container {
+      height: calc(~"100% - 50px");
+    }
   }
-}
 </style>

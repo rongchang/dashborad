@@ -108,7 +108,7 @@ export default {
   height: 34%;
   display: flex;
   flex-direction: column;
-
+  background-color: rgba(6, 30, 93, 0.5);
   .lc1-header {
     text-align: center;
     height: 40px;
