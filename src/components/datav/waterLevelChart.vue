@@ -1,9 +1,9 @@
 <template>
   <div id="water-level-chart">
-    <div class="water-level-chart-title">计划交易额</div>
+    <div class="water-level-chart-title">计划收入累计完成情况</div>
 
     <div class="water-level-chart-details">
-      计划完成<span>{{order_sum_price}}</span>元
+      累计完成<span>{{order_sum_price}}</span>元
     </div>
 
     <div class="chart-container" >
@@ -52,7 +52,7 @@ export default {
       this.config = {
         data: [this.percent],
         shape: 'round',
-        waveHeight: 10,
+        waveHeight: 25,
         waveNum: 2
       }
     },
