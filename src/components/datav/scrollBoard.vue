@@ -51,7 +51,7 @@ export default {
         header: ['评价日期','评价内容'],
         data: this.order,
         index: true,
-        columnWidth: [40, 80,520],
+        columnWidth: [80],
         align: ['center'],
         rowNum: 7,
         headerBGC: '#1981f6',

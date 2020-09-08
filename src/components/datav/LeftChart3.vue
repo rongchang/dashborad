@@ -1,9 +1,8 @@
 <template>
   <div class="left-chart-3">
-    <div class="lc1-header">今日活动数据</div>
-    <!--<div class="lc3-header">今日活动数据</div>-->
-    <!--<div class="lc3-details">今日活动数据</div>-->
+    <div class="lc3-title">今日活动数据</div>
     <dv-capsule-chart class="lc3-chart" :config="config" />
+    <dv-decoration-2 style="height:10px;" />
   </div>
 </template>
 
@@ -92,47 +91,41 @@ export default {
 </script>
 
 <style lang="less">
-.left-chart-3 {
-  width: 100%;
-  height: 27%;
-  display: flex;
-  flex-direction: column;
-  background-color: rgba(6, 30, 93, 0.5);
-  .lc1-header {
-    text-align: center;
-    height: 40px;
+  .left-chart-3 {
+    width: 100%;
+    height: 34%;
     display: flex;
-    justify-content: center;
-    align-items: center;
-    font-size: 30px;
-    margin-bottom: 20px;
-  }
-  .lc3-header {
-    height: 20px;
-    line-height: 20px;
-    font-size: 16px;
-    text-indent: 20px;
-    margin-top: 10px;
-  }
+    flex-direction: column;
+    background-color: rgba(6, 30, 93, 0.5);
 
-  .lc3-details {
-    height: 40px;
-    font-size: 16px;
-    display: flex;
-    align-items: center;
-    text-indent: 20px;
-
-    span {
-      /*color: #096dd9;*/
+    .lc3-title {
+      text-align: center;
+      height: 40px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      /*margin-bottom: 10px;*/
       font-weight: bold;
-      font-size: 35px;
-      margin-left: 20px;
+      text-indent: 20px;
+      font-size: 20px;
+    }
+    .lc3-details {
+      height: 40px;
+      font-size: 16px;
+      display: flex;
+      align-items: center;
+      text-indent: 20px;
+
+      span {
+        color: #096dd9;
+        font-weight: bold;
+        font-size: 35px;
+        margin-left: 20px;
+      }
+    }
+
+    .lc3-chart {
+      flex: 1;
     }
   }
-
-  .lc3-chart {
-    height:50px;
-    flex: 1;
-  }
-}
 </style>

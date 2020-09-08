@@ -1,9 +1,8 @@
 <template>
-  <div class="left-chart-2">
-    <div class="lc1-header">收入类型</div>
-    <div class="lc2-details">总收入金额<span>{{total}}</span></div>
-    <dv-charts class="lc2-chart" :option="option" />
-    <!--<dv-decoration-2 style="height:10px;" />-->
+  <div class="left-chart-4">
+    <div class="lc4-title">收入类型</div>
+    <div class="lc4-details">总收入金额<span>10000</span></div>
+    <dv-charts class="lc4-chart" :option="option" />
   </div>
 </template>
 
@@ -103,46 +102,49 @@ export default {
 </script>
 
 <style lang="less">
-.left-chart-2 {
-  width: 100%;
-  height: 34%;
-  display: flex;
-  flex-direction: column;
-  background-color: rgba(6, 30, 93, 0.5);
-  .lc1-header {
-    text-align: center;
-    height: 40px;
+  .left-chart-4 {
+    width: 100%;
+    height: 33%;
     display: flex;
-    justify-content: center;
-    align-items: center;
-    font-size: 30px;
-    margin-bottom: 20px;
-  }
-  .lc2-header {
-    height: 20px;
-    line-height: 20px;
-    font-size: 16px;
-    text-indent: 20px;
-    margin-top: 10px;
-  }
+    flex-direction: column;
+    background-color: rgba(6, 30, 93, 0.5);
+    padding-bottom: 20px;
 
-  .lc2-details {
-    height: 40px;
-    font-size: 16px;
-    display: flex;
-    align-items: center;
-    text-indent: 20px;
-
-    span {
-      /*color: #096dd9;*/
+    .lc4-title {
+      text-align: center;
+      height: 40px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      /*margin-bottom: 20px;*/
       font-weight: bold;
-      font-size: 35px;
-      margin-left: 20px;
+      text-indent: 20px;
+      font-size: 20px;
+    }
+    .lc4-header {
+      height: 20px;
+      line-height: 20px;
+      font-size: 16px;
+      text-indent: 20px;
+      margin-top: 10px;
+    }
+
+    .lc4-details {
+      height: 40px;
+      font-size: 16px;
+      display: flex;
+      align-items: center;
+      text-indent: 20px;
+      span {
+        color: #f46827;
+        font-weight: bold;
+        font-size: 25px;
+        margin-left: 20px;
+      }
+    }
+
+    .lc4-chart {
+      height: calc(~"100% - 70px");
     }
   }
-
-  .lc2-chart {
-    height: calc(~"100% - 80px");
-  }
-}
 </style>
