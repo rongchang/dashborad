@@ -82,7 +82,6 @@ export default {
     border-top: 2px solid rgba(1, 153, 209, .5);
     display: flex;
     flex-direction: column;
-    margin-right: 10px;
 
     .water-level-chart-title {
       font-weight: bold;

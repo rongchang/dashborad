@@ -48,10 +48,10 @@ export default {
 
     createData () {
       this.config = {
-        header: ['评价日期','评价内容'],
+        header: ['评价日期', '评价内容'],
         data: this.order,
         index: true,
-        columnWidth: [80],
+        columnWidth: [50, 80],
         align: ['center'],
         rowNum: 7,
         headerBGC: '#1981f6',

@@ -1,5 +1,5 @@
 <template>
-  <div id="rose-chart" style="margin-left: 7px;">
+  <div id="rose-chart">
     <div class="rose-chart-title">城市订单金额分布</div>
     <dv-charts :option="option" />
   </div>

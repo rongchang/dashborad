@@ -5,7 +5,6 @@
       <div class="main-content">
         <digital-flop />
         <div class="block-left-right-content">
-          <!--<ranking-board />-->
           <div class="left-chart-container">
             <Left-Chart-2 />
             <Left-Chart-3 />
@@ -29,36 +28,36 @@
 </template>
 
 <script>
-  import topHeader from './topHeader'
-  import digitalFlop from './digitalFlop'
-  import roseChart from './roseChart'
-  import waterLevelChart from './waterLevelChart'
-  import scrollBoard from './scrollBoard'
-  import LeftChart2 from './LeftChart2'
-  import LeftChart3 from './LeftChart3'
-  import LeftChart4 from './LeftChart4'
-  import Kuaixi from './Kuaixi'
-  import Order from './Order'
+import topHeader from './topHeader'
+import digitalFlop from './digitalFlop'
+import roseChart from './roseChart'
+import waterLevelChart from './waterLevelChart'
+import scrollBoard from './scrollBoard'
+import LeftChart2 from './LeftChart2'
+import LeftChart3 from './LeftChart3'
+import LeftChart4 from './LeftChart4'
+import Kuaixi from './Kuaixi'
+import Order from './Order'
 
-  export default {
-    name: 'DataView',
-    components: {
-      topHeader,
-      digitalFlop,
-      roseChart,
-      waterLevelChart,
-      scrollBoard,
-      LeftChart4,
-      LeftChart2,
-      LeftChart3,
-      Kuaixi,
-      Order
-    },
-    data () {
-      return {}
-    },
-    methods: {}
-  }
+export default {
+  name: 'DataView',
+  components: {
+    topHeader,
+    digitalFlop,
+    roseChart,
+    waterLevelChart,
+    scrollBoard,
+    LeftChart4,
+    LeftChart2,
+    LeftChart3,
+    Kuaixi,
+    Order
+  },
+  data () {
+    return {}
+  },
+  methods: {}
+}
 </script>
 
 <style lang="less">

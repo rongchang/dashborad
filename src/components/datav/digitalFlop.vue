@@ -225,49 +225,51 @@ export default {
 </script>
 
 <style lang="less">
-#digital-flop {
-  position: relative;
-  height: 15%;
-  flex-shrink: 0;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  background-color: rgba(6, 30, 93, 0.5);
-
-  .dv-decoration-10 {
-    position: absolute;
-    width: 95%;
-    left: 2.5%;
-    height: 5px;
-    bottom: 0px;
-  }
-
-  .digital-flop-item {
-    width: 11%;
-    height: 80%;
+  #digital-flop {
+    position: relative;
+    height: 15%;
+    flex-shrink: 0;
     display: flex;
-    flex-direction: column;
-    justify-content: center;
+    justify-content: space-between;
     align-items: center;
-    border-left: 3px solid rgb(6, 30, 93);
-    border-right: 3px solid rgb(6, 30, 93);
-  }
+    background-color: rgba(6, 30, 93, 0.5);
 
-  .digital-flop-title {
-    font-size: 20px;
-    margin-bottom: 20px;
-  }
+    .dv-decoration-10 {
+      position: absolute;
+      width: 96%;
+      left: 2.5%;
+      height: 5px;
+      bottom: 0px;
+    }
 
-  .digital-flop {
-    display: flex;
-  }
+    .digital-flop-item {
+      width: 13%;
+      height: 80%;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      border-left: 3px solid rgb(6, 30, 93);
+      border-right: 3px solid rgb(6, 30, 93);
+    }
 
-  .unit {
-    margin-left: 10px;
-    display: flex;
-    align-items: flex-end;
-    box-sizing: border-box;
-    padding-bottom: 13px;
+    .digital-flop-title {
+      font-size: 20px;
+      font-weight: bold;
+      margin-bottom: 20px;
+    }
+
+    .digital-flop {
+      display: flex;
+    }
+
+    .unit {
+      margin-left: 10px;
+      font-size: 20px;
+      display: flex;
+      align-items: flex-end;
+      box-sizing: border-box;
+      padding-bottom: 13px;
+    }
   }
-}
 </style>
