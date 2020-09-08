@@ -157,18 +157,10 @@ export default {
         series: [
           {
             data: this.e_order_count,
-            type: 'line',
+            type: 'bar',
             name:e_name,
-            smooth: true,
-            lineArea: {
-              show: true,
-              gradient: ['rgba(55, 162, 218, 0.6)', 'rgba(55, 162, 218, 0)']
-            },
-            linePoint: {
-              radius: 4,
-              style: {
-                fill: '#00db95'
-              }
+            barStyle: {
+              fill: 'rgba(0, 186, 255, 0.4)'
             }
           },
           {
@@ -178,12 +170,15 @@ export default {
             smooth: true,
             lineArea: {
               show: true,
-              gradient: ['rgba(56, 166, 218, 0.6)', 'rgba(56, 166, 218, 0)']
+              gradient: ['rgba(55, 162, 218, 0.6)', 'rgba(55, 162, 218, 0)']
+            },
+            lineStyle: {
+              lineDash: [5, 5]
             },
             linePoint: {
               radius: 4,
               style: {
-                fill: '#ff5ca9'
+                fill: '#00db95'
               }
             }
           }

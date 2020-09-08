@@ -3,7 +3,7 @@
     <div class="water-level-chart-title">计划交易额</div>
 
     <div class="water-level-chart-details">
-      计划完成<span>{{order_sum_price}}</span>元
+      计划完成<span>50000000</span>元
     </div>
 
     <div class="chart-container" >
@@ -43,12 +43,8 @@ export default {
 
       mqclient.on('message', (topic, message) => {
         var order = JSON.parse(message)
-        var msg = order.order
-        console.log(msg)
-        this.order_sum_price = msg.order_target_price
-        var target = msg.order_target_price == 0 ? 1 : msg.order_target_price
-        this.percent = ((msg.order_sum_price / target).toFixed(2)) * 100
-
+        var order_price = order.total.order_price + order.total.paylog_price + order.total.shopping_price + order.total.keyaccount_money
+        this.percent = ((order_price / 50000000) * 100).toFixed(2)
         this.createData()
       })
     },
@@ -63,10 +59,13 @@ export default {
   },
   mounted () {
     this.$http.get('http://express.edaixipublic.com/api/data/analysis/orderData').then(response => {
-      var order = response.body.data.order
-      this.order_sum_price = order.order_target_price
-      var target = order.order_target_price == 0?1:order.order_target_price
-      this.percent = ((order.order_sum_price / target).toFixed(2)) * 100
+      var order = response.body.data
+      console.log(response.body.data)
+      var order_price = order.total.order_price + order.total.paylog_price + order.total.shopping_price + order.total.keyaccount_money
+      console.log(order.total.keyaccount_money)
+      console.log(order_price)
+      this.percent = ((order_price / 50000000) * 100).toFixed(2)
+      console.log(this.percent)
       this.createData()
     }, response => {
       console.log('请求失败')

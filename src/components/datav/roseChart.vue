@@ -10,20 +10,21 @@
 
   let mqclient
 
-  mqclient = mqtt.connect('ws://172.16.0.26:15675/ws', {
-    username: "yt",
-    password: "123456"
+  mqclient = mqtt.connect('ws://111.231.29.18:15675/ws', {
+    username: 'yaoyao',
+    password: 'Xiaojingling%!8'
   })
 export default {
   name: 'RoseChart',
   data () {
     return {
       option: {},
-      order_timeout:1,
-      qujian_timeout_count:1,
-      quwuliu_timeout_count:1,
-      qingxi_timeout_count:1,
-      songwuliu_timeout_count:1
+      city_data:[
+        { name: '深圳', value: 34},
+        { name: '北京', value: 440},
+        { name: '杭州', value: 6},
+        { name: '上海', value: 78}
+      ]
     }
   },
   created () {
@@ -32,7 +33,7 @@ export default {
   methods: {
     getMsg () {
       mqclient.on('connect', function () {
-        mqclient.subscribe('order_status', { qos: 0 }, function (err) {
+        mqclient.subscribe('order_data', { qos: 0 }, function (err) {
           if (!err) {
             console.log('订阅成功')
           }
@@ -41,15 +42,17 @@ export default {
 
       mqclient.on('message', (topic, message) => {
         console.log('收到来自', topic, '的消息', message)
-        var msg=JSON.parse(message);
-        this.order_timeout=msg.timeout_count.order_timeout;
-        this.qujian_timeout_count=msg.timeout_count.qujian_timeout_count;
-        this.quwuliu_timeout_count=msg.timeout_count.quwuliu_timeout_count;
-        this.qingxi_timeout_count=msg.timeout_count.qingxi_timeout_count;
-        this.songwuliu_timeout_count=msg.timeout_count.songwuliu_timeout_count;
-        console.log(msg)
-        console.log(this.order_timeout)
-        console.log(this.qujian_timeout_count)
+        var data=JSON.parse(message);
+        var msg=data.city;
+        var arr=[];
+        for (var i=0;i<msg.length;i++) {
+          arr.push({'name':msg[i].name,"value":Number(msg[i].num)})
+        }
+        this.city_data=arr;
+        // this.order_timeout=msg.timeout_count.order_timeout;
+        // this.qujian_timeout_count=msg.timeout_count.qujian_timeout_count;
+        // this.quwuliu_timeout_count=msg.timeout_count.quwuliu_timeout_count;
+        // this.qingxi_timeout_count=msg.timeout_count.qingxi_timeout_count;
         this.createData()
       })
     },
@@ -60,13 +63,7 @@ export default {
             type: 'pie',
             radius: '50%',
             roseSort: false,
-            data: [
-              { name: '订单超时', value: this.order_timeout},
-              { name: '取件超时', value: this.qujian_timeout_count},
-              { name: '取件物流超时', value: this.quwuliu_timeout_count},
-              { name: '清洗超时', value: this.qingxi_timeout_count},
-              { name: '送件物流超时', value: this.songwuliu_timeout_count},
-            ],
+            data: this.city_data,
             insideLabel: {
               show: false
             },
@@ -88,14 +85,17 @@ export default {
     },
   },
   mounted () {
-    this.$http.get('http://express.edaixipublic.com/api/data/analysis/orderStatus').then(response =>{
-      var msg=response.body.data;
-      console.log(msg)
-      this.order_timeout=msg.timeout_count.order_timeout>0?msg.timeout_count.order_timeout:1;
-      this.qujian_timeout_count=msg.timeout_count.qujian_timeout_count;
-      this.quwuliu_timeout_count=msg.timeout_count.quwuliu_timeout_count;
-      this.qingxi_timeout_count=msg.timeout_count.qingxi_timeout_count;
-      this.songwuliu_timeout_count=msg.timeout_count.songwuliu_timeout_count;
+    this.$http.get('http://express.edaixipublic.com/api/data/analysis/orderData').then(response =>{
+      var msg=response.body.data.city;
+      var arr=[];
+      for (var i=0;i<msg.length;i++) {
+        arr.push({'name':msg[i].name,"value":Number(msg[i].num)})
+      }
+      this.city_data=arr;
+      // this.city_beijing=msg.city.;
+      // this.city_shanghai=msg.timeout_count.qujian_timeout_count;
+      // this.city_shenzhen=msg.timeout_count.quwuliu_timeout_count;
+      // this.city_nanjing=msg.timeout_count.qingxi_timeout_count;
       this.createData();
 
     }, response=>{

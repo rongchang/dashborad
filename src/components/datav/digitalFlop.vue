@@ -24,9 +24,9 @@ import mqtt from 'mqtt'
 
 let mqclient
 
-mqclient = mqtt.connect('ws://172.16.0.14:15675/ws', {
-  username: "yt",
-  password: "123456"
+mqclient = mqtt.connect('ws://111.231.29.18:15675/ws', {
+  username: 'yaoyao',
+  password: 'Xiaojingling%!8'
 })
 
 export default {
@@ -34,7 +34,15 @@ export default {
   data () {
     return {
       digitalFlopData: [],
-      test: this.randomExtend(20000, 30000)
+      order_price: 0,
+      shopping_price:0,
+      paylog_price:0,
+      e_price:0,
+      express_price:0,
+      suxi_price:0,
+      new_price:0,
+      keyaccount_money:0,
+      alipay:0
     }
   },
   created () {
@@ -43,7 +51,7 @@ export default {
   methods: {
     getMsg () {
       mqclient.on('connect', function () {
-        mqclient.subscribe('order', { qos: 0 }, function (err) {
+        mqclient.subscribe('order_data', { qos: 0 }, function (err) {
           if (!err) {
             console.log('订阅成功')
           }
@@ -51,8 +59,17 @@ export default {
       })
 
       mqclient.on('message', (topic, message) => {
-        console.log('收到来自', topic, '的消息', message.toString())
-        this.test = Number(message)
+        console.log('收到来自', topic, '的消息hhh', message.toString())
+        var msg = JSON.parse(message)
+        this.shopping_price = Number(msg.total.shopping_price);
+        this.paylog_price = Number(msg.total.paylog_price);
+        this.order_price = Number(msg.total.order_price);
+        this.alipay = Number(msg.total.alipay_price);
+        this.e_price = Number(msg.total.e_price);
+        this.express_price = Number(msg.total.express_price);
+        this.suxi_price = Number(msg.total.suxi_price);
+        this.new_price = Number(msg.total.new_price);
+        this.keyaccount_money=Number(msg.total.keyaccount_money);
         this.createData()
       })
     },
@@ -62,69 +79,119 @@ export default {
 
       this.digitalFlopData = [
         {
-          title: '管养里程',
+          title: '小E订单收入',
           number: {
-            number: [this.test],
+            number: [this.e_price],
             content: '{nt}',
-            textAlign: 'right',
+            formatter: 123456789,
+            textAlign: 'center',
             style: {
-              fill: '#4d99fc',
-              fontWeight: 'bold'
+              fill: '#F77976',
+              fontWeight: 'bold',
+              fontSize:25
             }
           },
-          unit: '公里'
+          unit: '元'
         },
         {
-          title: '桥梁',
+          title: '快递订单收入',
           number: {
-            number: [randomExtend(20, 30)],
+            number: [this.express_price],
             content: '{nt}',
-            textAlign: 'right',
+            textAlign: 'center',
+            style: {
+              fill: '#F77976',
+              fontWeight: 'bold',
+              fontSize:25
+            }
+          },
+          unit: '元'
+        },
+
+        {
+          title: '充值收入',
+          number: {
+            number: [this.paylog_price],
+            content: '{nt}',
+            textAlign: 'center',
             style: {
               fill: '#f46827',
-              fontWeight: 'bold'
+              fontWeight: 'bold',
+              fontSize:25
             }
+
           },
-          unit: '座'
+          unit: '元'
         },
         {
-          title: '涵洞隧道',
+          title: '拼团收入',
           number: {
-            number: [randomExtend(20, 30)],
+            number: [this.shopping_price],
+            content: '{nt}',
+            textAlign: 'center',
+            style: {
+              fill: '#A0E426',
+              fontWeight: 'bold',
+              fontSize:25
+            }
+          },
+          unit: '元'
+        },
+        {
+          title: '支付宝收入',
+          number: {
+            number: [this.alipay],
+            content: '{nt}',
+            textAlign: 'center',
+            style: {
+              fill: '#33A8C7',
+              fontWeight: 'bold',
+              fontSize:25
+            }
+          },
+          unit: '元'
+        },
+        {
+          title: '5小时快洗收入',
+          number: {
+            number: [this.suxi_price],
+            content: '{nt}',
+            textAlign: 'center',
+            style: {
+              fill: '#FFAB00',
+              fontWeight: 'bold',
+              fontSize:25
+            }
+          },
+          unit: '元'
+        },
+        {
+          title: '新用户收入',
+          number: {
+            number: [ this.new_price ],
             content: '{nt}',
             textAlign: 'right',
             style: {
-              fill: '#40faee',
-              fontWeight: 'bold'
+              fill: '#F050AE',
+              fontWeight: 'bold',
+              fontSize:25
             }
           },
-          unit: '个'
+          unit: '元'
         },
         {
-          title: '匝道',
+          title: '大客户回款',
           number: {
-            number: [randomExtend(10, 20)],
+            number: [ this.keyaccount_money ],
             content: '{nt}',
             textAlign: 'right',
             style: {
-              fill: '#4d99fc',
-              fontWeight: 'bold'
+              fill: '#9336FD',
+              fontWeight: 'bold',
+              fontSize:25
             }
           },
-          unit: '个'
-        },
-        {
-          title: '隧道',
-          number: {
-            number: [randomExtend(5, 10)],
-            content: '{nt}',
-            textAlign: 'right',
-            style: {
-              fill: '#f46827',
-              fontWeight: 'bold'
-            }
-          },
-          unit: '个'
+          unit: '元'
         }
       ]
     },
@@ -137,11 +204,22 @@ export default {
     }
   },
   mounted () {
-    const { createData } = this
-
-    createData()
-
-    // setInterval(createData, 30000)
+    this.$http.get('http://express.edaixipublic.com/api/data/analysis/orderData').then(response => {
+      var msg = response.body.data;
+      console.log(msg)
+      this.shopping_price = Number(msg.total.shopping_price);
+      this.paylog_price = Number(msg.total.paylog_price);
+      this.order_price = Number(msg.total.order_price);
+      this.alipay = Number(msg.total.alipay_price);
+      this.e_price = Number(msg.total.e_price);
+      this.express_price = Number(msg.total.express_price);
+      this.suxi_price = Number(msg.total.suxi_price);
+      this.new_price = Number(msg.total.new_price);
+      this.keyaccount_money=Number(msg.total.keyaccount_money);
+      this.createData();
+    }, response => {
+      console.log('请求失败')
+    })
   }
 }
 </script>

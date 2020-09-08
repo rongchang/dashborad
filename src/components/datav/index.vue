@@ -1,72 +1,64 @@
-
 <template>
   <div id="data-view">
     <dv-full-screen-container>
-      <div class="main-header">
-        <div class="mh-right">
-
-        </div>
-      </div>
-
-      <dv-border-box-1 class="main-container">
-        <dv-border-box-3 class="left-chart-container">
-
-          <ranking-board />
-
-        </dv-border-box-3>
-
-        <div class="right-main-container">
-          <div class="rmc-top-container">
-            <dv-border-box-3 class="rmctc-left-container">
-
-              <Center-Cmp />
-
-            </dv-border-box-3>
-
-            <div class="rmctc-right-container">
-              <dv-border-box-3 class="rmctc-chart-1">
-
-                <scroll-board />
-
-              </dv-border-box-3>
-
+      <top-header />
+      <div class="main-content">
+        <digital-flop />
+        <div class="block-left-right-content">
+          <!--<ranking-board />-->
+          <div class="left-chart-container">
+            <Left-Chart-2 />
+            <Left-Chart-3 />
+            <Left-Chart-4 />
+          </div>
+          <div class="block-top-bottom-content">
+            <div class="block-top-content">
+              <rose-chart />
+              <water-level-chart />
+              <scroll-board />
+            </div>
+            <div class="block-bottom-content">
+              <order />
+              <kuaixi />
             </div>
           </div>
-
-          <dv-border-box-4 class="rmc-bottom-container">
-
-            <top-left-cmp/>
-            <top-right-cmp/>
-
-          </dv-border-box-4>
         </div>
-      </dv-border-box-1>
-
+      </div>
     </dv-full-screen-container>
   </div>
 </template>
 
 <script>
-import rankingBoard from './rankingBoard'
-import scrollBoard from './scrollBoard'
-import topRightCmp from './topRightCmp'
-import topLeftCmp from './topLeftCmp'
-import CenterCmp from './CenterCmp'
+  import topHeader from './topHeader'
+  import digitalFlop from './digitalFlop'
+  import roseChart from './roseChart'
+  import waterLevelChart from './waterLevelChart'
+  import scrollBoard from './scrollBoard'
+  import LeftChart2 from './LeftChart2'
+  import LeftChart3 from './LeftChart3'
+  import LeftChart4 from './LeftChart4'
+  import Kuaixi from './Kuaixi'
+  import Order from './Order'
 
-export default {
-  name: 'DataView',
-  components: {
-    rankingBoard,
-    scrollBoard,
-    topRightCmp,
-    topLeftCmp,
-    CenterCmp
-  },
-  data () {
-    return {}
-  },
-  methods: {}
-}
+  export default {
+    name: 'DataView',
+    components: {
+      topHeader,
+      digitalFlop,
+      roseChart,
+      waterLevelChart,
+      scrollBoard,
+      LeftChart4,
+      LeftChart2,
+      LeftChart3,
+      Kuaixi,
+      Order
+    },
+    data () {
+      return {}
+    },
+    methods: {}
+  }
 </script>
 
 <style lang="less">
@@ -75,6 +67,7 @@ export default {
     height: 100%;
     background-color: #030409;
     color: #fff;
+
     #dv-full-screen-container {
       background-image: url('./img/bg.png');
       background-size: 100% 100%;
@@ -82,61 +75,49 @@ export default {
       display: flex;
       flex-direction: column;
     }
-    .main-header {
-      height: 80px;
+
+    .main-content {
+      flex: 1;
       display: flex;
-      justify-content: space-between;
-      align-items: flex-end;
-      .mh-left {
-        font-size: 20px;
-        color: rgb(1,134,187);
-        a:visited {
-          color: rgb(1,134,187);
-        }
-      }
-      .mh-middle {
-        font-size: 30px;
-      }
-      .mh-left, .mh-right {
-        width: 450px;
-      }
+      flex-direction: column;
     }
-    .main-container {
-      height: calc(~"100% - 80px");
-      .border-box-content {
-        padding: 20px;
-        box-sizing: border-box;
-        display: flex;
-      }
+
+    .block-left-right-content {
+      flex: 1;
+      display: flex;
+      margin-top: 20px;
+    }
+
+    .block-top-bottom-content {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      box-sizing: border-box;
+      padding-left: 20px;
+    }
+
+    .block-top-content {
+      height: 55%;
+      display: flex;
+      flex-grow: 0;
+      box-sizing: border-box;
+      padding-bottom: 20px;
+    }
+    .block-bottom-content {
+      height: 60%;
+      display: flex;
+      flex-grow: 0;
+      box-sizing: border-box;
+      padding-bottom: 20px;
     }
     .left-chart-container {
+      border-top: 2px solid rgba(1, 153, 209, .5);
       width: 22%;
-      padding: 10px;
+      /*padding: 10px;*/
       box-sizing: border-box;
       .border-box-content {
         flex-direction: column;
       }
-    }
-    .right-main-container {
-      width: 78%;
-      padding-left: 5px;
-      box-sizing: border-box;
-    }
-    .rmc-top-container {
-      height: 65%;
-      display: flex;
-    }
-    .rmctc-left-container {
-      width: 65%;
-    }
-    .rmctc-right-container {
-      width: 35%;
-    }
-    .rmc-bottom-container {
-      height: 35%;
-    }
-    .rmctc-chart-1, .rmctc-chart-2 {
-      height: 100%;
     }
   }
 </style>

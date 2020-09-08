@@ -50,7 +50,7 @@ export default {
         header: [ '评价内容'],
         data: this.order,
         index: true,
-        columnWidth: [50, 300],
+        columnWidth: [40, 600],
         align: ['center'],
         rowNum: 7,
         headerBGC: '#1981f6',

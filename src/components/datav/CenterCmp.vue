@@ -8,20 +8,19 @@
 
     <div class="cc-details">
 
-<!--      <div>目标</div>-->
-      <dv-digital-flop :config="config1" style="width:600px;height:300px;" />
-<!--      <div class="card">5</div>-->
-<!--      <div class="card">0</div>-->
-<!--      <div class="card">0</div>-->
-<!--      <div class="card">0</div>-->
-<!--      <div class="card">w</div>-->
+      <div>目标</div>
+      <div class="card">5</div>
+      <div class="card">0</div>
+      <div class="card">0</div>
+      <div class="card">0</div>
+      <div class="card">w</div>
     </div>
 
     <div class="cc-main-container">
       <div class="ccmc-left">
         <div class="station-info" >
           <p style="position: absolute; left: 30px;top: -50px;color: rgb(0, 186, 255);">剩余</p>
-          <span>{{surplus_num}}w</span>
+          <span><dv-digital-flop :config="surplus_num" style="width:100px;height:50px;" /></span>
         </div>
         <div class="station-info">
           <p style="position: absolute; left: 30px;top: -15px;color: rgb(61, 231, 201);">拼团</p><span style="position: absolute;top: 50px;">{{shopping_price}}</span>
@@ -60,15 +59,16 @@ export default {
   },
   data () {
     return {
-      config1:{},
       config: {},
       surplus_price:0,
       shopping_price:0,
       paylog_price:0,
       order_price:0,
-      surplus_num:0,
+      surplus_num:{
+        number: [100],
+        content: '{nt}w'
+      },
       order_num:0,
-      number:0,
       labelConfig: {
         data: ['剩余', '拼团', '充值', '订单']
       }
@@ -94,8 +94,12 @@ export default {
         this.paylog_price = msg.total.paylog_price;
         this.order_price = msg.total.order_price;
         this.order_num = Number(msg.total.order_price / 10000).toFixed(0);
-        this.surplus_num = Number(msg.total.surplus_price / 10000).toFixed(0);
-        this.number = 4999;
+        //this.surplus_num = Number(msg.total.surplus_price / 10000).toFixed(0);
+        var surplus_num={
+          number: [Number(msg.total.surplus_price / 10000).toFixed(0)],
+          content: '{nt}w'
+        }
+        this.surplus_num=surplus_num
         this.createData();
       })
     },
@@ -124,15 +128,6 @@ export default {
         lineWidth: 30,
         radius: '55%',
         activeRadius: '60%'
-      },
-      this.config1 = {
-        number: [this.number],
-        toFixed: 0,
-        content: '{nt}w',
-        style: {
-          fontSize: 100,
-          fill: '#3de7c9'
-        }
       }
     }
   },
@@ -146,8 +141,9 @@ export default {
       this.paylog_price = msg.total.paylog_price;
       this.order_price = msg.total.order_price;
       this.order_num = Number(msg.total.order_price / 10000).toFixed(0);
-      this.surplus_num = Number(msg.total.surplus_price / 10000).toFixed(0);
-      this.number=5000;
+      console.log(Number(msg.total.surplus_price / 10000).toFixed(0))
+      this.surplus_num.number=10000
+      // this.surplus_num = config1
       this.createData();
     }, response => {
       console.log('请求失败')
