@@ -42,7 +42,8 @@ export default {
       suxi_price:0,
       new_price:0,
       keyaccount_money:0,
-      alipay:0
+      alipay:0,
+      ecard_price:0
     }
   },
   created () {
@@ -69,7 +70,8 @@ export default {
         this.express_price = Number(msg.total.express_price);
         this.suxi_price = Number(msg.total.suxi_price);
         this.new_price = Number(msg.total.new_price);
-        this.keyaccount_money=Number(msg.total.keyaccount_money);
+        this.keyaccount_money = Number(msg.total.keyaccount_money);
+        this.ecard_price = Number(msg.total.ecard_price);
         this.createData()
       })
     },
@@ -152,9 +154,9 @@ export default {
           unit: '元'
         },
         {
-          title: '5小时快洗收入',
+          title: '小e购卡收入',
           number: {
-            number: [this.suxi_price],
+            number: [this.ecard_price],
             content: '{nt}',
             textAlign: 'center',
             style: {
@@ -216,6 +218,7 @@ export default {
       this.suxi_price = Number(msg.total.suxi_price);
       this.new_price = Number(msg.total.new_price);
       this.keyaccount_money=Number(msg.total.keyaccount_money);
+      this.ecard_price=Number(msg.total.ecard_price);
       this.createData();
     }, response => {
       console.log('请求失败')

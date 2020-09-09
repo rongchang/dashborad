@@ -43,7 +43,7 @@ export default {
 
       mqclient.on('message', (topic, message) => {
         var order = JSON.parse(message)
-        this.order_sum_price = order.total.order_price + order.total.paylog_price + order.total.shopping_price + order.total.keyaccount_money
+        this.order_sum_price = order.total.order_price + order.total.paylog_price + order.total.shopping_price + order.total.keyaccount_money + order.total.ecard_price
         this.percent = ((this.order_sum_price / 50000000) * 100).toFixed(2)
         this.createData()
       })
@@ -61,7 +61,7 @@ export default {
     this.$http.get('http://express.edaixipublic.com/api/data/analysis/orderData').then(response => {
       var order = response.body.data
       console.log(response.body.data)
-      this.order_sum_price = order.total.order_price + order.total.paylog_price + order.total.shopping_price + order.total.keyaccount_money
+      this.order_sum_price = order.total.order_price + order.total.paylog_price + order.total.shopping_price + order.total.keyaccount_money + order.total.ecard_price
       this.percent = ((this.order_sum_price / 50000000) * 100).toFixed(2)
       console.log(this.percent)
       this.createData()
