@@ -68,7 +68,7 @@ export default {
               show: false
             },
             outsideLabel: {
-              formatter: '{name} {value}',
+              formatter: '{percent}%\n{name}',
               labelLineEndLength: 20,
               style: {
                 fill: '#fff'
