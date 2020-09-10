@@ -1,7 +1,7 @@
 <template>
   <div class="left-chart-4">
     <div class="lc4-title">收入类型</div>
-    <div class="lc4-details">总收入金额<span>10000</span></div>
+    <div class="lc4-details">总收入金额<span>{{total}}</span></div>
     <dv-charts class="lc4-chart" :option="option" />
   </div>
 </template>
@@ -43,13 +43,13 @@ export default {
 
       mqclient.on('message', (topic, message) => {
         var data = JSON.parse(message)
-        var msg=data.total
+        var msg = data.total
         this.e_price = msg.e_price
         this.express_price = msg.express_price
-        this.shopping_price=msg.shopping_price
-        this.paylog_price=msg.paylog_price
-        this.suxi_price=msg.suxi_price
-        this.total=Number(this.e_price)+Number(this.express_price)+Number(this.shopping_price)+Number(this.paylog_price)+Number(this.suxi_price)
+        this.shopping_price = msg.shopping_price
+        this.paylog_price = msg.paylog_price
+        this.suxi_price = msg.suxi_price
+        this.total = Number(this.e_price) + Number(this.express_price) + Number(this.shopping_price) + Number(this.paylog_price) + Number(this.suxi_price)
         this.createData()
       })
     },
@@ -92,7 +92,7 @@ export default {
       this.shopping_price=msg.shopping_price
       this.paylog_price=msg.paylog_price
       this.suxi_price=msg.suxi_price
-      this.total=Number(this.e_price)+Number(this.express_price)+Number(this.shopping_price)+Number(this.paylog_price)+Number(this.suxi_price)
+      this.total=Number(this.e_price) + Number(this.express_price) + Number(this.shopping_price) + Number(this.paylog_price) + Number(this.suxi_price)
       this.createData()
     }, response => {
       console.log('请求失败')
