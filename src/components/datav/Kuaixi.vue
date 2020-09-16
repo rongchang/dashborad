@@ -40,12 +40,11 @@ export default {
 
       mqclient.on('message', (topic, message) => {
         var data = JSON.parse(message)
-        console.log('gggg')
         console.log(data)
-        this.qu_finish = data.qu_finish;
-        this.xiyidian_qianshou = data.xiyidian_qianshou;
-        this.song_paidan = data.song_paidan;
-        this.user_qianshou = data.user_qianshou;
+        this.qu_finish = Number(data.qu_finish);
+        this.xiyidian_qianshou = Number(data.xiyidian_qianshou);
+        this.song_paidan = Number(data.song_paidan);
+        this.user_qianshou = Number(data.user_qianshou);
         this.createData()
       })
     },
@@ -82,12 +81,11 @@ export default {
   mounted () {
     this.$http.get('http://express.edaixipublic.com/api/data/analysis/orderStatus').then(response => {
       var data = response.body.data;
-      console.log(1111)
       console.log(data)
-      this.qu_finish = data.qu_finish;
-      this.xiyidian_qianshou = data.xiyidian_qianshou;
-      this.song_paidan = data.song_paidan;
-      this.user_qianshou = data.user_qianshou;
+      this.qu_finish = Number(data.qu_finish);
+      this.xiyidian_qianshou = Number(data.xiyidian_qianshou);
+      this.song_paidan = Number(data.song_paidan);
+      this.user_qianshou = Number(data.user_qianshou);
       this.createData()
     }, response => {
       console.log('请求失败')
