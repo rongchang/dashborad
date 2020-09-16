@@ -6,25 +6,59 @@
 </template>
 
 <script>
+import mqtt from 'mqtt'
 
+let mqclient
+
+mqclient = mqtt.connect('ws://111.231.29.18:15675/ws', {
+  username: 'yaoyao',
+  password: 'Xiaojingling%!8'
+})
 export default {
   name: 'Kuaixi',
   data () {
     return {
-      option: {}
+      option: {},
+      qu_finish:0,
+      xiyidian_qianshou:0,
+      song_paidan:0,
+      user_qianshou:0
     }
   },
+  created () {
+    this.getMsg()
+  },
   methods: {
+    getMsg () {
+      mqclient.on('connect', function () {
+        mqclient.subscribe('order_status', { qos: 0 }, function (err) {
+          if (!err) {
+            console.log('订阅成功')
+          }
+        })
+      })
+
+      mqclient.on('message', (topic, message) => {
+        var data = JSON.parse(message)
+        console.log('gggg')
+        console.log(data)
+        this.qu_finish = data.qu_finish;
+        this.xiyidian_qianshou = data.xiyidian_qianshou;
+        this.song_paidan = data.song_paidan;
+        this.user_qianshou = data.user_qianshou;
+        this.createData()
+      })
+    },
     createData () {
       this.option = {
         series: [
           {
             type: 'pie',
             data: [
-              { name: '取件超时', value: 2000 },
-              { name: '取件运输超时', value: 3000 },
-              { name: '清洗超时', value: 4000 },
-              { name: '送件超时', value: 1000 }
+              { name: '取件超时', value: this.qu_finish },
+              { name: '取件运输超时', value: this.xiyidian_qianshou },
+              { name: '清洗超时', value: this.song_paidan },
+              { name: '送件超时', value: this.user_qianshou }
               // { name: '其他', value: 52 }
             ],
             radius: ['45%', '65%'],
@@ -46,11 +80,18 @@ export default {
     },
   },
   mounted () {
-    const { createData } = this
-
-    createData()
-
-    setInterval(createData, 30000)
+    this.$http.get('http://express.edaixipublic.com/api/data/analysis/orderStatus').then(response => {
+      var data = response.body.data;
+      console.log(1111)
+      console.log(data)
+      this.qu_finish = data.qu_finish;
+      this.xiyidian_qianshou = data.xiyidian_qianshou;
+      this.song_paidan = data.song_paidan;
+      this.user_qianshou = data.user_qianshou;
+      this.createData()
+    }, response => {
+      console.log('请求失败')
+    })
   }
 }
 </script>
