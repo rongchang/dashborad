@@ -1,6 +1,6 @@
 <template>
   <div class="left-chart-3">
-    <div class="lc3-title">今日活动数据</div>
+    <div class="lc3-title">总活动数据</div>
     <dv-capsule-chart class="lc3-chart" :config="config" />
     <dv-decoration-2 style="height:10px;" />
   </div>
@@ -53,11 +53,11 @@ export default {
       this.config = {
         data: [
           {
-            name: '今日拼团参与人数',
+            name: '总拼团参与人数',
             value: this.shopping_sum_humans
           },
           {
-            name: '今日成团数',
+            name: '总成团数',
             value: this.shopping_count
           },
           {
