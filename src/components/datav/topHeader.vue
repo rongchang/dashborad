@@ -3,7 +3,7 @@
     <dv-decoration-8 class="header-left-decoration" />
     <dv-decoration-5 class="header-center-decoration" />
     <dv-decoration-8 class="header-right-decoration" :reverse="true" />
-    <div class="center-title">e袋洗欢洗节综合数据 09/01至今</div>
+    <div class="center-title">e袋洗欢洗节综合数据 11/01至今</div>
   </div>
 </template>
 
